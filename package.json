@@ -1,0 +1,26 @@
+{
+  "name": "nodes-guru-casper-world",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^1.12.2",
+    "@styled-jsx/plugin-sass": "^4.0.1",
+    "echarts": "^5.2.2",
+    "mongoose": "^5.13.9",
+    "next": "12.0.4",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "sass": "^1.39.0"
+  },
+  "devDependencies": {
+    "@types/googlemaps": "^3.43.3",
+    "@types/mongoose": "^5.11.97",
+    "@types/react": "17.0.20",
+    "typescript": "4.4.2"
+  }
+}

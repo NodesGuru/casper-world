@@ -1,0 +1,37 @@
+@import "colors";
+@import url('https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+body::-webkit-scrollbar {
+  width: .5rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #dbdada;
+}
+
+html {
+  font-size: 12px;
+  overflow-y: scroll;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Play', sans-serif;
+  color: $black-color;
+  background-color: $body-bg;
+}
