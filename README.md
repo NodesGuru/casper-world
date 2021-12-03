@@ -21,7 +21,7 @@ Then you can proceed with casper world installation.
 Create .env file and fill parameters:
 
 - Google Map: Follow the instruction https://developers.google.com/maps/documentation/javascript/get-api-key to get NEXT_PUBLIC_GOOGLE_API_KEY
-- MongoDb: parameters are the same as for backend
+- MongoDB: parameters are the same as for backend
 
 Find an example below
 
