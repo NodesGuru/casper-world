@@ -10,21 +10,29 @@ Then you can proceed with casper world installation.
 
 ---
 
-## Install
+## Install casper world application
 
     $ git clone https://github.com/nodesguru/casper-world
     $ cd casper-world
     $ yarn install
 
-## Configure app
+## Configure the application
 
-Open .env.local file and fill the following variables:
+Create .env file and fill parameters:
 
-    NEXT_PUBLIC_GOOGLE_API_KEY=
-    DB_USER=
-    DB_PASSWORD=
-    DB_HOST=
-    DB_AUTH_SOURCE=
+- Google Map: Follow the instruction https://developers.google.com/maps/documentation/javascript/get-api-key to get NEXT_PUBLIC_GOOGLE_API_KEY
+- MongoDb: parameters are the same as for backend
+
+Find an example below
+
+    # Google map
+    NEXT_PUBLIC_GOOGLE_API_KEY=CrgZy9w7LxxXeuQb
+    
+    # MongoDB
+    DB_USER=Casper
+    DB_PASSWORD=YOUR_%24ECURE_P%40ASSW0RD
+    DB_HOST=127.0.0.1
+    DB_AUTH_SOURCE=casper
 
 ## Running the project
 
@@ -36,7 +44,7 @@ Open .env.local file and fill the following variables:
 $ yarn build
 ```
 
-Install as a serivce:
+Create service file and start the application using commands below:
 ```bash
 echo "[Unit]
 Description=Casper World
