@@ -102,45 +102,63 @@ export default function HomePage(props: Props) {
         }
 
         {
-          stats &&
+          stats && Object.values(stats).length > 0 &&
           <>
             <h2 className='world__subtitle'>Validators Stats</h2>
             <div className='world__stats'>
               <div>
-                <div className='world__stats-item'>
-                  <b>Latest Version</b>
-                  <span className='green'>{stats.latestVersion}</span>
-                </div>
+                {
+                  stats?.latestVersion >= 0 &&
+                  <div className='world__stats-item'>
+                    <b>Latest Version</b>
+                    <span className='green'>{stats.latestVersion}</span>
+                  </div>
+                }
 
-                <div className='world__stats-item'>
-                  <b>Outdated / Hidden</b>
-                  <span>{stats.outdatedVersion}</span>
-                </div>
+                {
+                  stats?.outdatedVersion >= 0 &&
+                  <div className='world__stats-item'>
+                    <b>Outdated / Hidden</b>
+                    <span>{stats.outdatedVersion}</span>
+                  </div>
+                }
               </div>
               <div>
-                <div className='world__stats-item'>
-                  <b>Total</b>
-                  <span>{stats.totalValidators}</span>
-                </div>
+                {
+                  stats?.totalValidators >= 0 &&
+                  <div className='world__stats-item'>
+                    <b>Total</b>
+                    <span>{stats.totalValidators}</span>
+                  </div>
+                }
 
-                <div className='world__stats-item'>
-                  <b>Active</b>
-                  <span className='green'>{stats.activeValidators}</span>
-                </div>
+                {
+                  stats?.activeValidators >= 0 &&
+                  <div className='world__stats-item'>
+                    <b>Active</b>
+                    <span className='green'>{stats.activeValidators}</span>
+                  </div>
+                }
               </div>
             </div>
 
             <div className='world__stats'>
               <div>
-                <div className='world__stats-item world__stats-stake'>
-                  <b>Active stake</b>
-                  <span className='green'>{numberWithCommas(stats.activeStake)}</span>
-                </div>
+                {
+                  stats?.activeStake &&
+                  <div className='world__stats-item world__stats-stake'>
+                    <b>Active stake</b>
+                    <span className='green'>{numberWithCommas(stats.activeStake)}</span>
+                  </div>
+                }
 
-                <div className='world__stats-item world__stats-stake'>
-                  <b>Inactive stake</b>
-                  <span className='red'>{numberWithCommas(stats.inactiveStake)}</span>
-                </div>
+                {
+                  stats?.inactiveStake &&
+                  <div className='world__stats-item world__stats-stake'>
+                    <b>Inactive stake</b>
+                    <span className='red'>{numberWithCommas(stats.inactiveStake)}</span>
+                  </div>
+                }
               </div>
             </div>
           </>
@@ -383,7 +401,7 @@ export async function getServerSideProps() {
     ])
 
   if (!totalStake.length && !totalDelegators.length && !coords.length && !stakeDecentralization.length
-    && !countries.length && !vps.length && !versions.length && !stats) {
+    && !countries.length && !vps.length && !versions.length && !Object.values(stats).length) {
     return {
       notFound: true
     }
