@@ -66,14 +66,25 @@ export async function getVersions(): Promise<PieData[]> {
   return calcPercent([...result.filter(v => v.name !== HIDDEN_VERSION), ...result.filter(v => v.name === HIDDEN_VERSION)])
 }
 
-async function getLatestVersion() {
-  const lastRecord = await Validator
-    .findOne({})
-    .sort({ version: -1 })
-    .limit(1)
-    .select('version')
+async function getLatestVersion(): Promise<string> {
+  const lastRecord = await Validator.aggregate([
+    { $match: { version: { $ne: null } } },
+    {
+      $group: {
+        _id: '$timestamp',
+        versions: { $addToSet: '$version' }
+      }
+    },
+    { $sort: { _id: -1 } },
+    { $limit: 1 },
+    {
+      $project: {
+        version: { $max: '$versions' }
+      }
+    }
+  ])
 
-  return lastRecord?.version
+  return lastRecord[0]?.version
 }
 
 export async function getCountries(): Promise<PieData[]> {
@@ -143,19 +154,11 @@ export async function getTotalDelegatorsByDays(): Promise<LineData[]> {
   return Validator.aggregate([
     { $match: { timestamp: { $in: timestamps } } },
     { $match: { current_stake: { $ne: null } } },
+    { $unwind: '$delegators' },
     {
       $group: {
         _id: { $toDate: '$timestamp' },
         delegators: { $addToSet: '$delegators.public_key' }
-      }
-    },
-    { $sort: { _id: 1 } },
-    { $unwind: '$delegators' },
-    { $unwind: '$delegators' },
-    {
-      $group: {
-        _id: '$_id',
-        delegators: { $addToSet: '$delegators' }
       }
     },
     {
@@ -166,7 +169,7 @@ export async function getTotalDelegatorsByDays(): Promise<LineData[]> {
       }
     },
     { $sort: { date: 1 } }
-  ])
+  ]).allowDiskUse(true)
 }
 
 export async function getCoordinates(): Promise<MapData[]> {
